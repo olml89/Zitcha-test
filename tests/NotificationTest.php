@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Services\NotificationService;
+use App\Services\NotifierFactory;
 use PHPUnit\Framework\TestCase;
 
 class NotificationTest extends TestCase
@@ -23,7 +24,7 @@ class NotificationTest extends TestCase
         $this->expectOutputString($consoleOutput);
 
         try {
-            $notificationService = new NotificationService();
+            $notificationService = new NotificationService(new NotifierFactory());
             $notificationService->sendNotification( 'test message', $provider);
         } catch (\Throwable) {
             //
